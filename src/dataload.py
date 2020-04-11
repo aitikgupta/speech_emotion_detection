@@ -1,9 +1,9 @@
 import os
 import numpy as np
-from audio_utils import load_audio, play_audio
-from generic_utils import give_label
+from src.audio_utils import load_audio, play_audio
+from src.generic_utils import give_label
 
-def load_data(path="voices", mode="dev", n_random=-1, play_runtime=False, verbose=True):
+def load_data(path="./voices", mode="dev", n_random=-1, play_runtime=False, verbose=True):
     if verbose:
         print("[INFO] Loading Data!")
     dataset = []

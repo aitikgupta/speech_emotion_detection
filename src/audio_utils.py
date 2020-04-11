@@ -17,12 +17,12 @@ def load_audio(path=None, normalize=True, input_length=70000):
         data = np.pad(data, (0, max(0, input_length - len(data))), "constant")
     return data, sample_rate
 
-def save_audio(data, path="output", sample_rate=22050, normalize=True):
+def save_audio(data, path="./output", sample_rate=22050, normalize=True):
     librosa.output.write_wav(path, data, sr=sample_rate, norm=normalize)
 
 def py_error_handler(filename, line, function, err, fmt):
         pass
-def play_audio(path="output/recording.wav", verbose=True):
+def play_audio(path="./output/recording.wav", verbose=True):
     if verbose:
         print("[INFO] Playing Audio!")
     ERROR_HANDLER_FUNC = CFUNCTYPE(None, c_char_p, c_int, c_char_p, c_int, c_char_p)
@@ -48,7 +48,7 @@ def play_audio(path="output/recording.wav", verbose=True):
     p.terminate()
     asound.snd_lib_error_set_handler(None)
 
-def record_audio(output_path="output/recording.wav", chunk=1024, channels=1, rate=48000, duration=3.35):
+def record_audio(output_path="./output/recording.wav", chunk=1024, channels=1, rate=48000, duration=3.35):
     ERROR_HANDLER_FUNC = CFUNCTYPE(None, c_char_p, c_int, c_char_p, c_int, c_char_p)
     c_error_handler = ERROR_HANDLER_FUNC(py_error_handler)
     asound = cdll.LoadLibrary('libasound.so')

@@ -4,13 +4,13 @@ try:
   tf.config.experimental.set_memory_growth(physical_devices[0], True) 
 except: 
   pass
-from preprocess import generate_features
-from features import log_specgram
-from generic_utils import label_to_str
+from src.preprocess import generate_features
+from src.features import log_specgram
+from src.generic_utils import label_to_str
 from keras.models import load_model
 import numpy as np
 
-def predict_emotion(dataset, labels=None, mode="dev", model_path="model/model.h5", verbose=False):
+def predict_emotion(dataset, labels=None, mode="dev", model_path="./model/model.h5", verbose=False):
   print("[INFO] Predicting!")
   feat = generate_features(dataset, datatype=mode)
 

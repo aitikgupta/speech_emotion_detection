@@ -1,7 +1,7 @@
 import numpy as np
 from scipy import signal
 import librosa
-from generic_utils import plot_spectogram
+from src.generic_utils import plot_spectogram
 
 def generate_ft(audio, sr, verbose=False):
     n_fft = 512

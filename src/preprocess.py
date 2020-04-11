@@ -1,6 +1,6 @@
 import numpy as np
-from audio_utils import load_audio, add_noise, add_shift, change_pitch, change_speed_pitch
-from features import log_specgram
+from src.audio_utils import load_audio, add_noise, add_shift, change_pitch, change_speed_pitch
+from src.features import log_specgram
 
 def scale(inp):
     return (inp - inp.mean())/inp.std()
