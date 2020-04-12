@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import librosa
 import librosa.display
 import numpy as np
+from sklearn.metrics import accuracy_score, classification_report
 
 def give_emotion(value):
     if value == 1 or value == 2:
@@ -84,3 +85,12 @@ def plot_traintest(history):
     plt.legend()
     plt.ylabel("Accuracy")
     plt.show()
+
+def generate_report(ytrue, ypred, verbose=True, just_acc=False):
+    if verbose:
+        print("[INFO] Generating Report!")
+    targets = ["male_calm","male_happy","male_sad","male_dislike","male_fearful","male_surprised","female_calm","female_happy","female_sad","female_dislike","female_fearful","female_surprised"]
+    if just_acc:
+        print("Total Accuracy:", accuracy_score(y_true=ytrue, y_pred=ypred))
+        return
+    print(classification_report(y_true=ytrue, y_pred=ypred, target_names=targets, labels=range(len(targets)), zero_division=0))
