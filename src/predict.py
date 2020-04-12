@@ -18,11 +18,28 @@ def predict_emotion(dataset, labels=None, mode="dev", model_path="./model/model.
 
   preds = model.predict(feat)
   
-  if verbose:
-    if mode == "user":  
-      for pred in range(preds.shape[0]):
-        print(f"Predicted: {label_to_str(np.argmax(preds[pred]))}")      
-    else:
-      for pred in range(preds.shape[0]):
-        print(f"Actual: {label_to_str(labels[pred])}, Predicted: {label_to_str(np.argmax(preds[pred]))}")
-  return np.argmax(preds, axis=1)
+  if mode == "user":  
+    predicts = []
+    probabilities = []
+    for pred in range(preds.shape[0]):
+      value = np.argmax(preds[pred])
+      confidence = max(preds[pred])
+      predicts.append(value)
+      probabilities.append(confidence)
+      if verbose:
+        print(f"Predicted: {label_to_str(value)}\tConfidence: {confidence}")
+    return np.array(predicts), np.array(probabilities)
+  else:
+    actual = []
+    predicts = []
+    probabilities = []
+    for pred in range(preds.shape[0]):
+      true_val = labels[pred]
+      pred_val = np.argmax(preds[pred])
+      confidence = max(preds[pred])
+      actual.append(true_val)
+      predicts.append(pred_val)
+      probabilities.append(confidence)
+      if verbose:
+        print(f"Actual: {label_to_str(true_val)}\tPredicted: {label_to_str(pred_val)}\tConfidence: {confidence}")
+    return np.array(actual), np.array(predicts), np.array(probabilities)
